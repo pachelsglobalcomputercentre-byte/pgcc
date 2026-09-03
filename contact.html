@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — PGCC Institute</title>
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="navbar" id="mainNavbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="PGCC Institute logo" onerror="this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'">
+      <span class="brand-text"><span class="brand-name">PGCC Institute</span><span class="brand-sub">Pachels Global Computer Centre</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="courses.html" class="nav-link">Courses</a>
+      <a href="admission.html" class="nav-link">Admission</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="ai-assistant.html" class="nav-link">AI Assistant</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link">Portals <i class="bi bi-chevron-down" style="font-size:10px;"></i></a>
+        <div class="dropdown-menu">
+          <a href="login.html?role=student"><i class="bi bi-mortarboard"></i> Student Portal</a>
+          <a href="login.html?role=instructor"><i class="bi bi-person-workspace"></i> Instructor Portal</a>
+          <a href="login.html?role=admin"><i class="bi bi-shield-lock"></i> Admin Portal</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="admission.html" class="btn btn-primary btn-sm">Apply Now</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+  </div>
+</header>
+
+<div class="mobile-panel">
+  <button class="mobile-close" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="courses.html">Courses</a>
+  <a href="admission.html">Admission</a>
+  <a href="news.html">News</a>
+  <a href="ai-assistant.html">AI Assistant</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Log In</a>
+  <a href="admission.html" style="color:var(--green-400);">Apply Now →</a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html" style="color:#9fc0a7;">Home</a> <i class="bi bi-chevron-right" style="font-size:10px;"></i> <span>Contact</span></div>
+    <h1>We'd love to hear from you.</h1>
+    <p>Questions about a course, admission, or your account? Reach out — our team replies within 24 hours.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-info-card">
+          <div class="ic"><i class="bi bi-geo-alt"></i></div>
+          <div><b style="display:block;margin-bottom:4px;">Campus Address</b><span class="muted" style="font-size:14px;">First Floor, 30 Okhunmwun Junction, Iguosa, Benin–Lagos Expressway, Benin City, Edo State</span></div>
+        </div>
+        <div class="contact-info-card">
+          <div class="ic"><i class="bi bi-telephone"></i></div>
+          <div><b style="display:block;margin-bottom:4px;">Phone</b><span class="muted" style="font-size:14px;">0807 073 8025 · 0805 511 2416</span></div>
+        </div>
+        <div class="contact-info-card">
+          <div class="ic"><i class="bi bi-envelope"></i></div>
+          <div><b style="display:block;margin-bottom:4px;">Email</b><span class="muted" style="font-size:14px;">pachelsglobalcomputercentre@gmail.com</span></div>
+        </div>
+        <div class="contact-info-card">
+          <div class="ic"><i class="bi bi-clock"></i></div>
+          <div><b style="display:block;margin-bottom:4px;">Office Hours</b><span class="muted" style="font-size:14px;">Mon – Fri: 8:00 AM – 5:00 PM · Sat: 9:00 AM – 1:00 PM</span></div>
+        </div>
+        <div class="map-frame" style="margin-top:16px;">
+          <iframe src="https://www.google.com/maps?q=Benin+City,+Edo+State,+Nigeria&output=embed" loading="lazy" title="PGCC Institute campus map" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="card" style="padding:32px;">
+          <h3 style="margin-bottom:6px;">Send a Message</h3>
+          <p class="muted" style="margin-bottom:26px;">We typically respond within one business day.</p>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-field"><label>Full Name *</label><input type="text" class="form-control" required></div>
+              <div class="form-field"><label>Phone Number</label><input type="tel" class="form-control"></div>
+            </div>
+            <div class="form-field"><label>Email Address *</label><input type="email" class="form-control" required></div>
+            <div class="form-field"><label>Subject</label>
+              <select class="form-control">
+                <option>General Inquiry</option>
+                <option>Course Information</option>
+                <option>Admission Question</option>
+                <option>Portal / Technical Support</option>
+                <option>Partnership</option>
+              </select>
+            </div>
+            <div class="form-field"><label>Message *</label><textarea class="form-control" required placeholder="How can we help?"></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block"><i class="bi bi-send"></i> Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+<button class="to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+<a href="ai-assistant.html" class="ai-fab"><span class="ring"><i class="bi bi-stars"></i></span> Ask AI Tutor</a>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/footer.js"></script>
+</body>
+</html>

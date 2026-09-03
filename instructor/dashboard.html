@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructor Dashboard — PGCC Institute</title>
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body class="dash-body" data-role="instructor">
+
+<div class="dash-shell">
+  <div class="sidebar-overlay"></div>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <img src="../assets/img/logo.png" alt="PGCC" onerror="this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'">
+      <div class="brand-text"><b>PGCC Institute</b><span>Instructor Portal</span></div>
+      <button class="sidebar-collapse-btn"><i class="bi bi-chevron-left"></i></button>
+    </div>
+    <div class="sidebar-role">Instructor Account</div>
+    <nav class="sidebar-nav">
+      <div class="side-group-label">Overview</div>
+      <a href="#overview" class="side-link active" data-section="overview"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a>
+
+      <div class="side-group-label">Teaching</div>
+      <a href="#upload-lessons" class="side-link" data-section="upload-lessons"><i class="bi bi-cloud-arrow-up"></i><span>Upload Lessons</span></a>
+      <a href="#create-assignments" class="side-link" data-section="create-assignments"><i class="bi bi-file-earmark-plus"></i><span>Create Assignments</span></a>
+      <a href="#create-exams" class="side-link" data-section="create-exams"><i class="bi bi-pencil-square"></i><span>Create CBT Exams</span></a>
+      <a href="#grade-assignments" class="side-link" data-section="grade-assignments"><i class="bi bi-clipboard-check"></i><span>Grade Assignments</span><span class="count" id="gradeCount">4</span></a>
+
+      <div class="side-group-label">Students</div>
+      <a href="#manage-students" class="side-link" data-section="manage-students"><i class="bi bi-people"></i><span>Manage Students</span></a>
+      <a href="#attendance" class="side-link" data-section="attendance"><i class="bi bi-calendar3-week"></i><span>Attendance</span></a>
+      <a href="#student-progress" class="side-link" data-section="student-progress"><i class="bi bi-graph-up-arrow"></i><span>Student Progress</span></a>
+
+      <div class="side-group-label">Connect</div>
+      <a href="#messages" class="side-link" data-section="messages"><i class="bi bi-chat-dots"></i><span>Messages</span></a>
+      <a href="#reports" class="side-link" data-section="reports"><i class="bi bi-bar-chart-line"></i><span>Reports</span></a>
+
+      <div class="side-group-label">Account</div>
+      <a href="../index.html" class="side-link"><i class="bi bi-box-arrow-left"></i><span>Visit Main Site</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <img data-user-avatar src="" alt="">
+        <div class="who"><b data-user-name></b><span data-user-id></span></div>
+      </div>
+      <a href="#" class="side-logout" data-logout><i class="bi bi-power"></i><span>Log Out</span></a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <button class="sidebar-toggle-mobile"><i class="bi bi-list"></i></button>
+      <div class="topbar-search"><i class="bi bi-search"></i><input type="text" placeholder="Search students, lessons…"></div>
+      <span class="topbar-page-title">Dashboard</span>
+      <div class="topbar-right">
+        <button class="topbar-icon-btn" data-bell><i class="bi bi-bell"></i><span class="dot"></span></button>
+        <div class="notif-panel" style="position:absolute;top:64px;right:20px;width:300px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-lg);padding:8px;display:none;z-index:400;"></div>
+        <div class="topbar-divider"></div>
+        <div class="topbar-user">
+          <img data-user-avatar src="" alt="">
+          <div class="who"><b data-user-name></b><span data-user-role></span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="dash-section active" id="overview">
+        <div class="welcome-banner">
+          <div>
+            <h2>Welcome back, <span id="welcomeName">Instructor</span> 👋</h2>
+            <p>Here's what's happening across your classes today.</p>
+          </div>
+          <button class="btn btn-ghost-light" data-goto-section="upload-lessons"><i class="bi bi-cloud-arrow-up"></i> Upload a Lesson</button>
+        </div>
+
+        <div class="stat-cards" id="instructorStatCards"></div>
+
+        <div class="dash-grid">
+          <div>
+            <div class="panel">
+              <div class="panel-head"><h3>Assignments Awaiting Grading</h3><a class="view-all" data-goto-section="grade-assignments">View all <i class="bi bi-arrow-right"></i></a></div>
+              <div id="gradingQueuePreview"></div>
+            </div>
+          </div>
+          <div>
+            <div class="panel">
+              <div class="panel-head"><h3>Student Progress</h3><a class="view-all" data-goto-section="student-progress">View all <i class="bi bi-arrow-right"></i></a></div>
+              <div id="studentProgressPreview"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ UPLOAD LESSONS ============ -->
+      <section class="dash-section" id="upload-lessons">
+        <div class="dash-head"><div><h1>Upload Lessons</h1><p class="muted">Share videos, PDFs, images, source code, or ZIP files with your students.</p></div></div>
+        <div class="panel">
+          <div class="form-row" style="margin-bottom:0;">
+            <div class="form-field"><label>Course</label>
+              <select class="form-control" id="uploadCourseSelect"></select>
+            </div>
+            <div class="form-field"><label>Lesson Title</label><input class="form-control" placeholder="e.g. CSS Flexbox & Grid Layouts"></div>
+          </div>
+          <div class="upload-zone" id="uploadZone">
+            <div class="ic"><i class="bi bi-cloud-arrow-up"></i></div>
+            <p style="margin:0 0 4px;font-weight:700;">Drag & drop files here, or click to browse</p>
+            <p class="muted" style="font-size:12.5px;">Supports video, PDF, image, source code, and ZIP files</p>
+            <div class="upload-types">
+              <span class="pill pill-outline"><i class="bi bi-camera-reels"></i> Video</span>
+              <span class="pill pill-outline"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+              <span class="pill pill-outline"><i class="bi bi-image"></i> Image</span>
+              <span class="pill pill-outline"><i class="bi bi-file-earmark-code"></i> Code</span>
+              <span class="pill pill-outline"><i class="bi bi-file-earmark-zip"></i> ZIP</span>
+            </div>
+            <input type="file" id="uploadInput" multiple hidden>
+          </div>
+          <div id="uploadFileList" style="margin:10px 0;"></div>
+          <div class="form-field"><label>Select Students to Notify</label>
+            <select class="form-control" multiple style="height:110px;">
+              <option selected>All students in this course</option>
+            </select>
+            <p class="hint">Hold Ctrl / Cmd to select specific students instead of the whole class.</p>
+          </div>
+          <button class="btn btn-primary" id="publishLessonBtn"><i class="bi bi-send-check"></i> Publish Lesson</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h3>Recent Uploads</h3></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Lesson</th><th>Type</th><th>Course</th><th>Uploaded</th><th></th></tr></thead>
+              <tbody id="uploadHistoryBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CREATE ASSIGNMENTS ============ -->
+      <section class="dash-section" id="create-assignments">
+        <div class="dash-head"><div><h1>Create Assignments</h1><p class="muted">Set tasks and select which students receive them.</p></div></div>
+        <div class="panel">
+          <form id="createAssignmentForm">
+            <div class="form-row">
+              <div class="form-field"><label>Assignment Title</label><input class="form-control" placeholder="e.g. Build a Responsive Landing Page" required></div>
+              <div class="form-field"><label>Course</label><select class="form-control" id="assignCourseSelect"></select></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Due Date</label><input type="date" class="form-control" required></div>
+              <div class="form-field"><label>Maximum Score</label><input type="number" class="form-control" value="100"></div>
+            </div>
+            <div class="form-field"><label>Instructions</label><textarea class="form-control" placeholder="Describe the task…"></textarea></div>
+            <div class="form-field"><label>Attach Reference File (optional)</label><input type="file" class="form-control"></div>
+            <div class="form-field"><label>Assign To</label>
+              <select class="form-control" multiple style="height:100px;"><option selected>All students in this course</option></select>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-send-check"></i> Create & Assign</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Active Assignments</h3></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Assignment</th><th>Due</th><th>Submissions</th><th></th></tr></thead>
+              <tbody id="instructorAssignmentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CREATE CBT EXAMS ============ -->
+      <section class="dash-section" id="create-exams">
+        <div class="dash-head"><div><h1>Create CBT Exams</h1><p class="muted">Build a computer-based test and set the exam date.</p></div></div>
+        <div class="panel">
+          <form id="createExamForm">
+            <div class="form-row">
+              <div class="form-field"><label>Exam Title</label><input class="form-control" placeholder="e.g. HTML & CSS Foundations" required></div>
+              <div class="form-field"><label>Course</label><select class="form-control" id="examCourseSelect"></select></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Exam Date</label><input type="date" class="form-control" required></div>
+              <div class="form-field"><label>Duration (minutes)</label><input type="number" class="form-control" value="45"></div>
+            </div>
+            <div id="examQuestionsWrap">
+              <div class="panel" style="background:var(--paper-2);">
+                <div class="flex justify-between items-center" style="margin-bottom:12px;"><b>Question 1</b></div>
+                <div class="form-field"><input class="form-control" placeholder="Enter question text"></div>
+                <div class="form-row">
+                  <div class="form-field"><input class="form-control" placeholder="Option A"></div>
+                  <div class="form-field"><input class="form-control" placeholder="Option B"></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-field"><input class="form-control" placeholder="Option C"></div>
+                  <div class="form-field"><input class="form-control" placeholder="Option D"></div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="addQuestionBtn" style="margin-bottom:20px;"><i class="bi bi-plus-lg"></i> Add Another Question</button>
+            <br>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-calendar-check"></i> Schedule Exam</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Your Exams</h3></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Exam</th><th>Course</th><th>Date</th><th>Questions</th><th>Status</th><th></th></tr></thead>
+              <tbody id="instructorExamsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANAGE STUDENTS ============ -->
+      <section class="dash-section" id="manage-students">
+        <div class="dash-head">
+          <div><h1>Manage Students</h1><p class="muted">Select any student to review their full record.</p></div>
+          <div class="input-icon" style="max-width:260px;"><i class="bi bi-search"></i><input class="form-control" id="studentSearchInput" placeholder="Search students…"></div>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Course</th><th>Progress</th><th>Average</th><th>Attendance</th><th>Status</th><th></th></tr></thead>
+              <tbody id="manageStudentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ GRADE ASSIGNMENTS ============ -->
+      <section class="dash-section" id="grade-assignments">
+        <div class="dash-head"><div><h1>Grade Assignments</h1><p class="muted">Review submissions and enter scores.</p></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px;" id="gradingQueueFull"></div>
+      </section>
+
+      <!-- ============ ATTENDANCE ============ -->
+      <section class="dash-section" id="attendance">
+        <div class="dash-head">
+          <div><h1>Attendance</h1><p class="muted">Mark today's class attendance.</p></div>
+          <button class="btn btn-primary btn-sm" id="saveAttendanceBtn"><i class="bi bi-check2-circle"></i> Save Attendance</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>ID</th><th>Status</th></tr></thead>
+              <tbody id="attendanceMarkBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STUDENT PROGRESS ============ -->
+      <section class="dash-section" id="student-progress">
+        <div class="dash-head"><div><h1>Student Progress</h1><p class="muted">Monitor each student's learning journey.</p></div></div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Progress</th><th>Average</th><th>Attendance</th><th>Status</th></tr></thead>
+              <tbody id="studentProgressFullBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MESSAGES ============ -->
+      <section class="dash-section" id="messages">
+        <div class="dash-head"><div><h1>Messages</h1><p class="muted">Chat directly with your students.</p></div></div>
+        <div class="chat-shell">
+          <div class="chat-list-col" id="instChatList"></div>
+          <div class="chat-main" id="instChatMain"></div>
+        </div>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="dash-section" id="reports">
+        <div class="dash-head"><div><h1>Reports</h1><p class="muted">Your teaching performance at a glance.</p></div></div>
+        <div class="grid grid-3" id="reportsGrid"></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+<div class="d-modal-overlay" id="studentProfileModal">
+  <div class="d-modal">
+    <div class="d-modal-head"><h3>Student Record</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div id="studentProfileModalBody"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site-config.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/dashboard-common.js"></script>
+<script src="../assets/js/instructor-dashboard.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    let titles = PGCC_DATA.courses.map(c => c.title);
+    try {
+      const res = await fetch(`${API_BASE_URL}/courses`);
+      const live = await res.json();
+      if (Array.isArray(live) && live.length) titles = live.map(c => c.title);
+    } catch (err) {
+      console.warn('Could not load live courses, showing demo catalog instead:', err.message);
+    }
+    ['uploadCourseSelect','assignCourseSelect','examCourseSelect'].forEach(id => {
+      const sel = document.getElementById(id);
+      if (sel) titles.forEach(title => sel.insertAdjacentHTML('beforeend', `<option>${title}</option>`));
+    });
+  });
+</script>
+</body>
+</html>

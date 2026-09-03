@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PGCC Institute — Pachels Global Computer Centre | Benin City</title>
+<meta name="description" content="Pachels Global Computer Centre (PGCC Institute) — hands-on computer training in Web Development, Data Analysis, Design, Networking, Cybersecurity & more in Benin City, Edo State.">
+<link rel="icon" href="assets/img/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar on-dark" id="mainNavbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="PGCC Institute logo" onerror="this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'">
+      <span class="brand-text"><span class="brand-name">PGCC Institute</span><span class="brand-sub">Pachels Global Computer Centre</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="courses.html" class="nav-link">Courses</a>
+      <a href="admission.html" class="nav-link">Admission</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="ai-assistant.html" class="nav-link">AI Assistant</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link">Portals <i class="bi bi-chevron-down" style="font-size:10px;"></i></a>
+        <div class="dropdown-menu">
+          <a href="login.html?role=student"><i class="bi bi-mortarboard"></i> Student Portal</a>
+          <a href="login.html?role=instructor"><i class="bi bi-person-workspace"></i> Instructor Portal</a>
+          <a href="login.html?role=admin"><i class="bi bi-shield-lock"></i> Admin Portal</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="admission.html" class="btn btn-primary btn-sm">Apply Now</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+  </div>
+</header>
+
+<div class="mobile-panel">
+  <button class="mobile-close" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="courses.html">Courses</a>
+  <a href="admission.html">Admission</a>
+  <a href="news.html">News</a>
+  <a href="ai-assistant.html">AI Assistant</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Log In</a>
+  <a href="admission.html" style="color:var(--green-400);">Apply Now →</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="hero-vine" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="vineGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#34c66f" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#17a34a" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M -50 650 C 200 600, 250 750, 480 680 C 650 630, 700 500, 900 480 C 1050 465, 1100 380, 1250 350" />
+    <path d="M 100 800 C 250 700, 300 620, 380 560 C 440 515, 400 430, 480 380" />
+    <circle cx="480" cy="680" r="5" fill="#34c66f" style="animation-delay:2.2s;"/>
+    <circle cx="900" cy="480" r="4" fill="#a3e6bc" style="animation-delay:2.5s;"/>
+    <circle cx="480" cy="380" r="4" fill="#34c66f" style="animation-delay:2.7s;"/>
+  </svg>
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-eyebrow"><i class="bi bi-mortarboard"></i> Benin City's hands-on tech school</span>
+      <h1>Grow real computer <em>skills</em>, not just certificates.</h1>
+      <p class="lead">Pachels Global Computer Centre trains beginners and professionals in web development, data, design, networking and more — with instructors who track your progress every step of the way.</p>
+      <div class="hero-actions">
+        <a href="admission.html" class="btn btn-primary"><i class="bi bi-rocket-takeoff"></i> Start Your Application</a>
+        <button class="btn btn-ghost-light" data-video-open="https://www.youtube.com/embed/3JZ_D3ELwOQ"><i class="bi bi-play-fill"></i> Watch a Class</button>
+      </div>
+      <div class="hero-stats reveal-stagger in">
+        <div class="hero-stat"><b data-count="1284">0</b><span>Students Trained</span></div>
+        <div class="hero-stat"><b data-count="34">0</b><span>Expert Instructors</span></div>
+        <div class="hero-stat"><b data-count="8">0</b><span>Career Tracks</span></div>
+        <div class="hero-stat"><b data-count="4.8" data-suffix="/5">0</b><span>Student Rating</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80" onerror="this.onerror=null;this.src='https://placehold.co/700x520/0f2e1d/ffffff?text=PGCC+Institute'" alt="Students learning at PGCC Institute">
+        <div class="hero-float-badge b1"><span class="ic"><i class="bi bi-patch-check"></i></span> Certified Curriculum</div>
+        <div class="hero-float-badge b2"><span class="ic"><i class="bi bi-graph-up-arrow"></i></span> 94% Completion Rate</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<div class="container">
+  <div class="strip">
+    <span>TRUSTED BY LEARNERS ACROSS EDO STATE</span>
+    <span><i class="bi bi-star-fill" style="color:var(--amber);"></i> 4.8/5 average rating</span>
+    <span><i class="bi bi-patch-check-fill" style="color:var(--green-500);"></i> Industry-aligned curriculum</span>
+    <span><i class="bi bi-briefcase-fill" style="color:var(--green-500);"></i> Internship placements</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT PREVIEW ============ -->
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center;gap:60px;">
+      <div class="reveal">
+        <div class="eyebrow">WHY PGCC INSTITUTE</div>
+        <h2 style="font-size:clamp(26px,3vw,38px);">Learning built like a living curriculum — always growing with you.</h2>
+        <p style="font-size:16px;margin-bottom:28px;">Since our founding, PGCC Institute has combined structured, instructor-led lessons with real progress tracking — so every student, instructor, and administrator always knows exactly where they stand.</p>
+        <div class="grid grid-2" style="gap:20px;">
+          <div class="flex gap-12" style="align-items:flex-start;">
+            <div class="feature-ic" style="margin-bottom:0;flex-shrink:0;"><i class="bi bi-camera-reels"></i></div>
+            <div><b style="display:block;margin-bottom:4px;">Video & PDF Lessons</b><span class="muted" style="font-size:13.5px;">Learn at your own pace, anywhere.</span></div>
+          </div>
+          <div class="flex gap-12" style="align-items:flex-start;">
+            <div class="feature-ic" style="margin-bottom:0;flex-shrink:0;"><i class="bi bi-clipboard-data"></i></div>
+            <div><b style="display:block;margin-bottom:4px;">Live Progress Tracking</b><span class="muted" style="font-size:13.5px;">See your growth after every class.</span></div>
+          </div>
+          <div class="flex gap-12" style="align-items:flex-start;">
+            <div class="feature-ic" style="margin-bottom:0;flex-shrink:0;"><i class="bi bi-robot"></i></div>
+            <div><b style="display:block;margin-bottom:4px;">24/7 AI Tutor</b><span class="muted" style="font-size:13.5px;">Get unstuck any time, day or night.</span></div>
+          </div>
+          <div class="flex gap-12" style="align-items:flex-start;">
+            <div class="feature-ic" style="margin-bottom:0;flex-shrink:0;"><i class="bi bi-patch-check"></i></div>
+            <div><b style="display:block;margin-bottom:4px;">Verified Certificates</b><span class="muted" style="font-size:13.5px;">Show employers proof of skill.</span></div>
+          </div>
+        </div>
+        <a href="about.html" class="btn btn-outline" style="margin-top:30px;">More About Our School <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="reveal" style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/800x600/e3f6ea/0b6b3a?text=PGCC+Institute'" style="border-radius:var(--r-lg);width:100%;aspect-ratio:4/3.2;object-fit:cover;" alt="Instructor helping a student">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSES PREVIEW ============ -->
+<section class="section section-panel">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">OUR COURSES</div>
+      <h2>Career tracks built for the real world</h2>
+      <p>Every course pairs recorded lessons with live practice, graded assignments, and a CBT exam at the end.</p>
+    </div>
+    <div class="grid grid-4 reveal-stagger" id="homeCoursesGrid"></div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="courses.html" class="btn btn-primary">View All Courses <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS BAND ============ -->
+<section class="section-tight">
+  <div class="container reveal">
+    <div class="stat-strip">
+      <div class="stat-block"><b data-count="1284">0</b><span>Students Trained</span></div>
+      <div class="stat-block"><b data-count="94" data-suffix="%">0</b><span>Course Completion Rate</span></div>
+      <div class="stat-block"><b data-count="240">0</b><span>Graduates This Year</span></div>
+      <div class="stat-block"><b data-count="34">0</b><span>Expert Instructors</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI ASSISTANT TEASER ============ -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <div class="eyebrow" style="color:#a3e6bc;">MEET YOUR AI LEARNING ASSISTANT</div>
+        <h2>Stuck on a lesson at midnight? Just ask.</h2>
+        <p>Every student gets a built-in AI Tutor for instant explanations, extra practice questions, and study help — included with every course.</p>
+      </div>
+      <a href="ai-assistant.html" class="btn btn-ghost-light">Meet the AI Assistant <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section section-panel">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">STUDENT VOICES</div>
+      <h2>Real growth, in their own words</h2>
+    </div>
+    <div class="testi-track-wrap reveal">
+      <div class="testi-track" id="testiTrack"></div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-prev" aria-label="Previous"><i class="bi bi-arrow-left"></i></button>
+      <button class="testi-next" aria-label="Next"><i class="bi bi-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY PREVIEW ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">CAMPUS LIFE</div>
+      <h2>A look inside PGCC Institute</h2>
+    </div>
+    <div class="gallery-grid reveal" id="homeGallery"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section-panel">
+  <div class="container">
+    <div class="grid grid-2" style="gap:60px;">
+      <div class="reveal">
+        <div class="eyebrow">FAQ</div>
+        <h2 style="font-size:clamp(26px,3vw,36px);">Questions, answered</h2>
+        <p>Can't find what you're looking for? <a href="contact.html" style="color:var(--green-700);font-weight:700;">Contact our admissions team</a>.</p>
+      </div>
+      <div class="reveal" id="homeFaq"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <div class="eyebrow" style="color:#a3e6bc;">ADMISSIONS OPEN</div>
+        <h2>Your next chapter starts with one class.</h2>
+        <p>Applications for the next cohort are open now. Spaces are limited per class to keep instructor attention high.</p>
+      </div>
+      <a href="admission.html" class="btn btn-ghost-light">Apply for Admission <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="siteFooter"></footer>
+
+<button class="to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+<a href="ai-assistant.html" class="ai-fab"><span class="ring"><i class="bi bi-stars"></i></span> Ask AI Tutor</a>
+
+<div class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" data-video-close><i class="bi bi-x-lg"></i></button>
+    <iframe src="" title="Class preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/footer.js"></script>
+<script>
+  // Home page dynamic sections
+  document.addEventListener('DOMContentLoaded', async () => {
+    let courses = PGCC_DATA.courses;
+    try {
+      const res = await fetch(`${API_BASE_URL}/courses`);
+      const live = await res.json();
+      if (Array.isArray(live) && live.length) {
+        courses = live.map(c => ({
+          title: c.title, cat: c.category || 'General', level: c.level || 'Beginner',
+          price: c.price || '—', duration: c.duration || '—', rating: c.rating || 5,
+          desc: c.description || '', img: resolveUploadUrl(c.image)
+        }));
+      }
+    } catch (err) {
+      console.warn('Could not load live courses, showing demo catalog instead:', err.message);
+    }
+
+    document.querySelector('#homeCoursesGrid').innerHTML = courses.slice(0, 4).map(c => `
+      <div class="card course-card">
+        <div class="thumb"><img src="${c.img}" onerror="${ONERR}" alt="${c.title}"><span class="course-level">${c.level}</span><span class="course-price">${c.price}</span></div>
+        <div class="course-body">
+          <span class="course-cat">${c.cat}</span>
+          <h3>${c.title}</h3>
+          <p>${c.desc}</p>
+          <div class="course-meta">
+            <span><i class="bi bi-clock"></i> ${c.duration}</span>
+            <span><i class="bi bi-star-fill" style="color:var(--amber);"></i> ${c.rating}</span>
+          </div>
+        </div>
+      </div>`).join('');
+
+    document.querySelector('#testiTrack').innerHTML = PGCC_DATA.testimonials.map(t => `
+      <div class="testi-card">
+        <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+        <p class="quote">"${t.quote}"</p>
+        <div class="testi-person"><img src="${t.avatar}" onerror="${ONERR}" alt=""><div><b>${t.name}</b><span>${t.role}</span></div></div>
+      </div>`).join('');
+
+    document.querySelector('#homeGallery').innerHTML = PGCC_DATA.gallery.slice(0, 6).map(src => `<a href="gallery.html"><img src="${src}" onerror="${ONERR}" alt="Campus photo" loading="lazy"></a>`).join('');
+
+    document.querySelector('#homeFaq').innerHTML = PGCC_DATA.faqs.map((f, i) => `
+      <div class="faq-item ${i===0?'open':''}">
+        <button class="faq-q">${f.q} <i class="bi bi-plus-lg"></i></button>
+        <div class="faq-a" style="${i===0?'max-height:200px;':''}"><p>${f.a}</p></div>
+      </div>`).join('');
+
+    // re-wire FAQ + reveal for freshly injected nodes
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q'); const a = item.querySelector('.faq-a');
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+        if (!isOpen) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+  });
+</script>
+</body>
+</html>

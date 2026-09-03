@@ -1,0 +1,61 @@
+/* =========================================================
+   PGCC INSTITUTE — DESIGN TOKENS
+   Palette drawn from the school's own sprout/leaf mark:
+   growth, cultivation, and steady upward progress.
+   ========================================================= */
+
+:root {
+  /* ---- Color: green family lifted straight from the logo ---- */
+  --ink-forest: #0f2e1d;      /* deep forest — dark surfaces */
+  --ink-forest-2: #123524;    /* slightly lighter dark surface */
+  --green-700: #0b6b3a;       /* deep emerald — secondary accent */
+  --green-500: #17a34a;       /* grassy green — primary accent  */
+  --green-400: #34c66f;       /* bright sprout — hovers/highlights */
+  --green-100: #e3f6ea;       /* pale mint — tints, chips */
+  --paper: #fbf8f1;           /* warm paper background */
+  --paper-2: #f3efe3;         /* slightly deeper paper for panels */
+  --ink: #12261a;             /* near-black green-tinted text */
+  --ink-soft: #48594d;        /* secondary text */
+  --amber: #e8a93b;           /* harvest amber — badges, ratings */
+  --amber-ink: #7a5313;
+  --coral: #e2604f;           /* alerts / due-soon */
+  --sky: #2e8bc4;             /* info accents */
+  --line: #e4ddc9;            /* hairline on paper */
+  --line-dark: rgba(255,255,255,0.12);
+  --white: #ffffff;
+
+  /* ---- Type ---- */
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- Radius & shadow ---- */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(15, 46, 29, 0.06);
+  --shadow-md: 0 12px 28px rgba(15, 46, 29, 0.10);
+  --shadow-lg: 0 24px 60px rgba(15, 46, 29, 0.16);
+
+  /* ---- Motion ---- */
+  --ease-grow: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+  --dur-slow: 900ms;
+
+  /* ---- Layout ---- */
+  --container: 1200px;
+  --sidebar-w: 264px;
+  --sidebar-w-collapsed: 84px;
+  --topbar-h: 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

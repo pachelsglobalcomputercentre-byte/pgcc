@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — PGCC Institute</title>
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
+<style>
+  .ql-editor { min-height: 160px; font-family: var(--font-body); font-size: 14.5px; }
+  .ql-toolbar.ql-snow { border-radius: var(--r-sm) var(--r-sm) 0 0; border-color: var(--line); }
+  .ql-container.ql-snow { border-radius: 0 0 var(--r-sm) var(--r-sm); border-color: var(--line); }
+</style>
+</head>
+<body class="dash-body" data-role="admin">
+
+<div class="dash-shell">
+  <div class="sidebar-overlay"></div>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <img src="../assets/img/logo.png" alt="PGCC" onerror="this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'">
+      <div class="brand-text"><b>PGCC Institute</b><span>Admin Portal</span></div>
+      <button class="sidebar-collapse-btn"><i class="bi bi-chevron-left"></i></button>
+    </div>
+    <div class="sidebar-role">Administrator</div>
+    <nav class="sidebar-nav">
+      <div class="side-group-label">Overview</div>
+      <a href="#overview" class="side-link active" data-section="overview"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a>
+
+      <div class="side-group-label">People</div>
+      <a href="#manage-students" class="side-link" data-section="manage-students"><i class="bi bi-people"></i><span>Manage Students</span></a>
+      <a href="#manage-instructors" class="side-link" data-section="manage-instructors"><i class="bi bi-person-workspace"></i><span>Manage Instructors</span></a>
+      <a href="#approve-admissions" class="side-link" data-section="approve-admissions"><i class="bi bi-person-check"></i><span>Approve Admissions</span><span class="count" id="admCount">3</span></a>
+
+      <div class="side-group-label">Academics</div>
+      <a href="#manage-courses" class="side-link" data-section="manage-courses"><i class="bi bi-journal-bookmark"></i><span>Manage Courses</span></a>
+      <a href="#manage-exams" class="side-link" data-section="manage-exams"><i class="bi bi-pencil-square"></i><span>Exams</span></a>
+      <a href="#manage-assignments" class="side-link" data-section="manage-assignments"><i class="bi bi-list-check"></i><span>Assignments</span></a>
+      <a href="#certificates" class="side-link" data-section="certificates"><i class="bi bi-patch-check"></i><span>Certificates</span></a>
+      <a href="#news" class="side-link" data-section="news"><i class="bi bi-newspaper"></i><span>News</span></a>
+
+      <div class="side-group-label">Communications</div>
+      <a href="#broadcast" class="side-link" data-section="broadcast"><i class="bi bi-megaphone"></i><span>Broadcast Hub</span></a>
+
+      <div class="side-group-label">Operations</div>
+      <a href="#manage-payments" class="side-link" data-section="manage-payments"><i class="bi bi-cash-stack"></i><span>Manage Payments</span></a>
+      <a href="#reports" class="side-link" data-section="reports"><i class="bi bi-bar-chart-line"></i><span>Reports</span></a>
+      <a href="#analytics" class="side-link" data-section="analytics"><i class="bi bi-graph-up-arrow"></i><span>Analytics</span></a>
+      <a href="#settings" class="side-link" data-section="settings"><i class="bi bi-gear"></i><span>Website Settings</span></a>
+
+      <div class="side-group-label">Account</div>
+      <a href="#my-profile" class="side-link" data-section="my-profile"><i class="bi bi-person-circle"></i><span>My Profile</span></a>
+      <a href="../index.html" class="side-link"><i class="bi bi-box-arrow-left"></i><span>Visit Main Site</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <img data-user-avatar src="" alt="">
+        <div class="who"><b data-user-name></b><span data-user-id></span></div>
+      </div>
+      <a href="#" class="side-logout" data-logout><i class="bi bi-power"></i><span>Log Out</span></a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <button class="sidebar-toggle-mobile"><i class="bi bi-list"></i></button>
+      <div class="topbar-search"><i class="bi bi-search"></i><input type="text" placeholder="Search anything…"></div>
+      <span class="topbar-page-title">Dashboard</span>
+      <div class="topbar-right">
+        <button class="topbar-icon-btn" data-bell><i class="bi bi-bell"></i><span class="dot"></span></button>
+        <div class="notif-panel" style="position:absolute;top:64px;right:20px;width:300px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-lg);padding:8px;display:none;z-index:400;"></div>
+        <div class="topbar-divider"></div>
+        <div class="topbar-user">
+          <img data-user-avatar src="" alt="">
+          <div class="who"><b data-user-name></b><span data-user-role></span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="dash-section active" id="overview">
+        <div class="welcome-banner">
+          <div>
+            <h2>Welcome back, <span id="welcomeName">Admin</span> 👋</h2>
+            <p>Here's how PGCC Institute is performing today.</p>
+          </div>
+          <button class="btn btn-ghost-light" data-goto-section="reports"><i class="bi bi-bar-chart-line"></i> View Full Reports</button>
+        </div>
+
+        <div class="stat-cards" id="adminStatCards"></div>
+
+        <div class="dash-grid">
+          <div>
+            <div class="panel">
+              <div class="panel-head"><h3>Pending Admissions</h3><a class="view-all" data-goto-section="approve-admissions">Review all <i class="bi bi-arrow-right"></i></a></div>
+              <div id="admissionsQueuePreview"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3>Recent News</h3><a class="view-all" data-goto-section="news">Manage <i class="bi bi-arrow-right"></i></a></div>
+              <div id="newsPreviewList"></div>
+            </div>
+          </div>
+          <div>
+            <div class="panel">
+              <div class="panel-head"><h3>Recent Payments</h3><a class="view-all" data-goto-section="manage-payments">View all <i class="bi bi-arrow-right"></i></a></div>
+              <div id="paymentsPreview"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANAGE STUDENTS ============ -->
+      <section class="dash-section" id="manage-students">
+        <div class="dash-head">
+          <div><h1>Manage Students</h1><p class="muted">Full record of all registered, approved students — payments, enrollment, and progress.</p></div>
+          <button class="btn btn-primary btn-sm" data-modal-open="addStudentModal"><i class="bi bi-person-plus"></i> Add Student</button>
+        </div>
+        <div class="filter-bar">
+          <button class="chip active" data-student-filter="all">All</button>
+          <button class="chip" data-student-filter="new">New Students</button>
+          <button class="chip" data-student-filter="old">Returning Students</button>
+          <button class="chip" data-student-filter="owing">Balance Due</button>
+          <button class="chip" data-student-filter="online"><i class="bi bi-laptop"></i> Online</button>
+          <button class="chip" data-student-filter="physical"><i class="bi bi-building"></i> Physical</button>
+          <div class="input-icon" style="margin-left:auto;max-width:240px;"><i class="bi bi-search"></i><input class="form-control" id="adminStudentSearch" placeholder="Search students…"></div>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Course</th><th>Mode</th><th>Enrolled</th><th>Course Cost</th><th>Paid</th><th>Balance</th><th>Time Remaining</th><th></th></tr></thead>
+              <tbody id="adminStudentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANAGE INSTRUCTORS ============ -->
+      <section class="dash-section" id="manage-instructors">
+        <div class="dash-head">
+          <div><h1>Manage Instructors</h1><p class="muted">Faculty teaching across all courses.</p></div>
+          <button class="btn btn-primary btn-sm" data-modal-open="addInstructorModal"><i class="bi bi-person-plus"></i> Add Instructor</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Instructor</th><th>Department</th><th>Students</th><th>Rating</th><th></th></tr></thead>
+              <tbody id="adminInstructorsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANAGE COURSES ============ -->
+      <section class="dash-section" id="manage-courses">
+        <div class="dash-head">
+          <div><h1>Manage Courses</h1><p class="muted">All course tracks offered by the school.</p></div>
+          <button class="btn btn-primary btn-sm" id="addCourseBtn"><i class="bi bi-journal-plus"></i> Add Course</button>
+        </div>
+        <div class="filter-bar">
+          <button class="chip active" data-course-filter="all">All</button>
+          <button class="chip" data-course-filter="online"><i class="bi bi-laptop"></i> Online</button>
+          <button class="chip" data-course-filter="physical"><i class="bi bi-building"></i> Physical</button>
+        </div>
+        <div class="grid grid-3" id="adminCoursesGrid"></div>
+      </section>
+
+      <!-- ============ COURSE EDITOR (reached via Add/Edit Course, not in sidebar) ============ -->
+      <section class="dash-section" id="course-editor">
+        <div class="dash-head">
+          <div><h1 id="courseEditorTitle">Edit Course</h1><p class="muted">Course details, then structure it into modules and lessons.</p></div>
+          <button class="btn btn-outline btn-sm" data-goto-section="manage-courses"><i class="bi bi-arrow-left"></i> Back to Courses</button>
+        </div>
+
+        <div id="courseStatusBanner" style="display:none;" class="panel"></div>
+
+        <div class="panel">
+          <p class="eyebrow">COURSE DETAILS</p>
+          <form id="courseDetailsForm">
+            <div class="form-row">
+              <div class="form-field"><label>Course Name *</label><input class="form-control" id="courseTitleInput" required></div>
+              <div class="form-field"><label>Category</label><input class="form-control" id="courseCategoryInput" placeholder="e.g. Web & Software Development"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Training Mode *</label>
+                <select class="form-control" id="courseDeliveryModeInput">
+                  <option value="online">Online Training</option>
+                  <option value="physical">Physical Training (in-person)</option>
+                </select>
+                <p class="hint">Every course belongs to exactly one mode — this keeps online and physical tracks from mixing.</p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Duration</label><input class="form-control" id="courseDurationInput" placeholder="e.g. 10 weeks"></div>
+              <div class="form-field"><label>Price</label><input class="form-control" id="coursePriceInput" placeholder="₦85,000"></div>
+            </div>
+            <div class="form-field"><label>Level</label>
+              <select class="form-control" id="courseLevelInput"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+            </div>
+            <div class="form-field"><label>Description / Details</label><textarea class="form-control" id="courseDescriptionInput" rows="3"></textarea></div>
+            <div class="form-field"><label>Cover Image</label><input type="file" class="form-control" id="courseImageInput" accept="image/*"></div>
+            <div class="form-row">
+              <div class="form-field"><label>Module Weight (% of overall grade)</label><input type="number" class="form-control" id="courseModuleWeightInput" value="40"></div>
+              <div class="form-field"><label>Exam Weight (% of overall grade)</label><input type="number" class="form-control" id="courseExamWeightInput" value="60"></div>
+            </div>
+            <p class="hint" style="margin-bottom:16px;">These should add up to 100. Assignments aren't part of the grade yet — that's a future addition.</p>
+            <button type="submit" class="btn btn-primary" id="saveCourseDetailsBtn"><i class="bi bi-check2-circle"></i> Save Course Details</button>
+          </form>
+        </div>
+
+        <div id="courseStructureWrap" style="display:none;">
+          <div class="panel">
+            <div class="panel-head"><h3>Modules & Lessons</h3><button class="btn btn-outline btn-sm" id="addModuleBtn"><i class="bi bi-plus-lg"></i> Add Module</button></div>
+            <div id="modulesList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MANAGE PAYMENTS ============ -->
+      <section class="dash-section" id="manage-payments">
+        <div class="dash-head"><div><h1>Manage Payments</h1><p class="muted">Track tuition payments across the school.</p></div></div>
+        <div class="stat-strip" id="paymentTotals" style="margin-bottom:20px;"></div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Course</th><th>Amount</th><th>Status</th><th>Date</th><th></th></tr></thead>
+              <tbody id="adminPaymentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ APPROVE ADMISSIONS ============ -->
+      <section class="dash-section" id="approve-admissions">
+        <div class="dash-head"><div><h1>Approve Admissions</h1><p class="muted">Review and approve new student applications.</p></div></div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Applicant</th><th>Course</th><th>Mode</th><th>Applied</th><th>Status</th><th></th></tr></thead>
+              <tbody id="admissionsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WEBSITE SETTINGS ============ -->
+      <section class="dash-section" id="settings">
+        <div class="dash-head"><div><h1>Website Settings</h1><p class="muted">Manage global settings for the PGCC Institute website.</p></div></div>
+        <div class="settings-tabs">
+          <button class="active" data-pane="paneGeneral">General</button>
+          <button data-pane="paneBranding">Branding</button>
+          <button data-pane="paneNotify">Notifications</button>
+          <button data-pane="paneSecurity">Security</button>
+        </div>
+        <form id="settingsForm">
+          <div class="panel settings-pane" id="paneGeneral">
+            <div class="form-row">
+              <div class="form-field"><label>School Name</label><input class="form-control" id="setSchoolName"></div>
+              <div class="form-field"><label>Short Name</label><input class="form-control" id="setShortName"></div>
+            </div>
+            <div class="form-field"><label>Address</label><input class="form-control" id="setAddress"></div>
+            <div class="form-row">
+              <div class="form-field"><label>Phone</label><input class="form-control" id="setPhone"></div>
+              <div class="form-field"><label>Email</label><input class="form-control" id="setEmail"></div>
+            </div>
+          </div>
+          <div class="panel settings-pane" id="paneBranding" style="display:none;">
+            <div class="form-field"><label>Logo</label>
+              <div class="flex items-center gap-16"><img id="setLogoPreview" src="../assets/img/logo.png" style="width:60px;height:60px;object-fit:contain;background:var(--paper-2);border-radius:12px;padding:8px;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'"><button type="button" class="btn btn-outline btn-sm" id="setLogoBtn">Upload New Logo</button><input type="file" id="setLogoInput" accept="image/*" hidden></div>
+            </div>
+            <div class="form-field"><label>Primary Color</label><input type="color" id="setPrimaryColor" value="#17a34a" style="width:60px;height:40px;border:1px solid var(--line);border-radius:8px;"></div>
+            <p class="hint">Logo and color are saved for reference now; applying them site-wide everywhere is a follow-up step.</p>
+          </div>
+          <div class="panel settings-pane" id="paneNotify" style="display:none;">
+            <div class="setting-row"><div><b>Email Notifications</b><span>Send email for new admissions, payments, and messages.</span></div><label class="switch"><input type="checkbox" id="setEmailNotif"><span class="slider-toggle"></span></label></div>
+            <div class="setting-row"><div><b>SMS Alerts</b><span>Send SMS for urgent account activity.</span></div><label class="switch"><input type="checkbox" id="setSmsAlerts"><span class="slider-toggle"></span></label></div>
+            <div class="setting-row"><div><b>Weekly Digest</b><span>Summary email every Monday morning.</span></div><label class="switch"><input type="checkbox" id="setWeeklyDigest"><span class="slider-toggle"></span></label></div>
+          </div>
+          <div class="panel settings-pane" id="paneSecurity" style="display:none;">
+            <div class="setting-row"><div><b>Two-Factor Authentication</b><span>Require 2FA for all admin accounts.</span></div><label class="switch"><input type="checkbox" id="setTwoFactor"><span class="slider-toggle"></span></label></div>
+            <div class="setting-row"><div><b>Auto Logout (minutes)</b><span>Sign out inactive sessions automatically.</span></div><input type="number" class="form-control" id="setAutoLogout" style="width:90px;"></div>
+          </div>
+          <div id="settingsMsg" class="pill pill-green" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+          <button type="submit" class="btn btn-primary" id="saveSettingsBtn"><i class="bi bi-check2-circle"></i> Save Changes</button>
+        </form>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="dash-section" id="reports">
+        <div class="dash-head"><div><h1>Reports</h1><p class="muted">School-wide performance at a glance.</p></div></div>
+        <div class="grid grid-3" id="adminReportsGrid" style="margin-bottom:20px;"></div>
+        <div class="panel">
+          <div class="panel-head"><h3>Revenue — Last 8 Months</h3></div>
+          <div style="display:flex;gap:14px;align-items:flex-end;" id="revenueBars"></div>
+        </div>
+      </section>
+
+      <!-- ============ CERTIFICATES ============ -->
+      <section class="dash-section" id="certificates">
+        <div class="dash-head"><div><h1>Certificates</h1><p class="muted">Certificates issued to graduating students.</p></div></div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Course</th><th>Status</th><th></th></tr></thead>
+              <tbody id="adminCertificatesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ NEWS ============ -->
+      <section class="dash-section" id="news">
+        <div class="dash-head">
+          <div><h1>News &amp; Announcements</h1><p class="muted">Publish updates to the public website.</p></div>
+          <button class="btn btn-primary btn-sm" id="newArticleBtn"><i class="bi bi-newspaper"></i> New Article</button>
+        </div>
+        <div class="grid grid-3" id="adminNewsGrid"></div>
+      </section>
+
+      <!-- ============ MANAGE EXAMS ============ -->
+      <section class="dash-section" id="manage-exams">
+        <div class="dash-head">
+          <div><h1>Exams</h1><p class="muted">Create and manage CBT exams, organized by course.</p></div>
+          <button class="btn btn-primary btn-sm" id="addExamBtn"><i class="bi bi-plus-lg"></i> Create Exam</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Exam</th><th>Course</th><th>Duration</th><th>Questions</th><th>Unlocks After</th><th></th></tr></thead>
+              <tbody id="adminExamsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ EXAM EDITOR (reached via Create/Edit Exam, not in sidebar) ============ -->
+      <section class="dash-section" id="exam-editor">
+        <div class="dash-head">
+          <div><h1 id="examEditorTitle">Create Exam</h1><p class="muted">Set the exam details, then add questions.</p></div>
+          <button class="btn btn-outline btn-sm" data-goto-section="manage-exams"><i class="bi bi-arrow-left"></i> Back to Exams</button>
+        </div>
+
+        <div class="panel">
+          <p class="eyebrow">EXAM DETAILS</p>
+          <div class="form-row">
+            <div class="form-field"><label>Exam Title *</label><input class="form-control" id="examTitleInput" required></div>
+            <div class="form-field"><label>Associated Course *</label><select class="form-control" id="examCourseSelectInput" required></select></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field" style="max-width:220px;"><label>Duration (minutes) *</label><input type="number" class="form-control" id="examDurationInput" value="30"></div>
+            <div class="form-field" style="max-width:280px;">
+              <label>Modules Required to Unlock</label>
+              <input type="number" min="0" class="form-control" id="examRequiredModulesInput" value="0">
+              <p class="hint">Students must complete this many modules of the course before this exam becomes available. 0 = no restriction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="eyebrow">ADD QUESTIONS — PASTE FORMAT</p>
+          <p class="hint" style="margin-bottom:12px;">Paste questions in this exact format and click Parse — one blank line between questions:</p>
+          <pre style="background:var(--paper-2);border-radius:var(--r-sm);padding:14px 16px;font-size:12.5px;font-family:var(--font-mono);white-space:pre-wrap;margin-bottom:14px;">1. What does CPU stand for?
+A. Central Processing Unit
+B. Computer Processing Unit
+C. Central Program Unit
+D. Computer Personal Unit
+Correct Answer: A</pre>
+          <textarea class="form-control" id="examPasteInput" rows="8" placeholder="Paste your formatted questions here…"></textarea>
+          <div class="flex gap-8" style="margin-top:12px;">
+            <button type="button" class="btn btn-outline btn-sm" id="parsePastedBtn"><i class="bi bi-magic"></i> Parse Questions</button>
+            <label class="btn btn-outline btn-sm" style="margin:0;cursor:pointer;">
+              <i class="bi bi-upload"></i> Import CSV / Text File
+              <input type="file" id="examFileInput" accept=".csv,.txt" hidden>
+            </label>
+          </div>
+          <p class="hint" style="margin-top:10px;">CSV/text format: one question per line — <code>Question | Option A | Option B | Option C | Option D | Correct Letter</code></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h3>Question Bank (<span id="questionCount">0</span>)</h3><button class="btn btn-outline btn-sm" id="addQuestionManualBtn"><i class="bi bi-plus-lg"></i> Add Question Manually</button></div>
+          <div id="questionBankList"></div>
+          <div id="examEditorMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-top:16px;"></div>
+          <button class="btn btn-primary" id="saveExamBtn" style="margin-top:16px;"><i class="bi bi-check2-circle"></i> Save Exam</button>
+        </div>
+      </section>
+
+      <!-- ============ ASSIGNMENTS ============ -->
+      <section class="dash-section" id="manage-assignments">
+        <div class="dash-head">
+          <div><h1>Assignments</h1><p class="muted">Post coursework, organized by course, and grade what students submit.</p></div>
+          <button class="btn btn-primary btn-sm" id="addAssignmentBtn"><i class="bi bi-plus-lg"></i> Create Assignment</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Assignment</th><th>Course</th><th>Due Date</th><th>Submissions</th><th></th></tr></thead>
+              <tbody id="adminAssignmentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BROADCAST HUB ============ -->
+      <section class="dash-section" id="broadcast">
+        <div class="dash-head"><div><h1>Broadcast Hub</h1><p class="muted">Email and notify students directly — individually, by course category, or everyone.</p></div></div>
+
+        <div class="panel">
+          <p class="eyebrow">COMPOSE</p>
+          <div class="form-field"><label>Subject / Title *</label><input class="form-control" id="broadcastTitleInput" required></div>
+
+          <div class="form-field"><label>Send As</label>
+            <div class="role-tabs" style="max-width:420px;">
+              <button type="button" class="broadcast-channel-btn active" data-channel="both"><i class="bi bi-envelope-check"></i> Email + Notification</button>
+              <button type="button" class="broadcast-channel-btn" data-channel="email"><i class="bi bi-envelope"></i> Email Only</button>
+              <button type="button" class="broadcast-channel-btn" data-channel="notification"><i class="bi bi-bell"></i> Notification Only</button>
+            </div>
+          </div>
+
+          <div class="form-field"><label>Recipients</label>
+            <div class="role-tabs" style="max-width:420px;">
+              <button type="button" class="broadcast-audience-btn active" data-audience="all"><i class="bi bi-people"></i> All Students</button>
+              <button type="button" class="broadcast-audience-btn" data-audience="category"><i class="bi bi-collection"></i> By Category</button>
+              <button type="button" class="broadcast-audience-btn" data-audience="individual"><i class="bi bi-person"></i> Individual</button>
+            </div>
+          </div>
+          <div class="form-field" id="broadcastCategoryWrap" style="display:none;"><label>Course Category</label><select class="form-control" id="broadcastCategorySelect"></select></div>
+          <div class="form-field" id="broadcastIndividualWrap" style="display:none;"><label>Select Students</label><select class="form-control" id="broadcastStudentSelect" multiple style="height:140px;"></select><p class="hint">Hold Ctrl / Cmd to select multiple.</p></div>
+
+          <div class="form-field"><label>Message</label><div id="broadcastQuillEditor"></div></div>
+          <div id="broadcastMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin:16px 0;"></div>
+          <button class="btn btn-primary" id="sendBroadcastBtn" style="margin-top:16px;"><i class="bi bi-send"></i> Send</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h3>Recent Broadcasts</h3></div>
+          <div id="broadcastHistory"></div>
+        </div>
+      </section>
+
+      <!-- ============ ANALYTICS ============ -->
+      <section class="dash-section" id="analytics">
+        <div class="dash-head"><div><h1>Analytics</h1><p class="muted">Key numbers across the whole school.</p></div></div>
+        <div class="stat-strip" id="analyticsSummary"></div>
+        <div class="dash-grid" style="margin-top:20px;">
+          <div class="panel">
+            <div class="panel-head"><h3>Enrollment by Category</h3></div>
+            <div id="analyticsCategoryList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Online vs Physical</h3></div>
+            <div id="analyticsModeList"></div>
+          </div>
+        </div>
+        <div class="dash-grid" style="margin-top:20px;">
+          <div class="panel text-center" style="grid-column:1/-1;">
+            <h3 style="font-size:15px;margin-bottom:20px;">Completion Rate</h3>
+            <div id="analyticsRing"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MY PROFILE ============ -->
+      <section class="dash-section" id="my-profile">
+        <div class="dash-head"><div><h1>My Profile</h1><p class="muted">Your admin account details.</p></div></div>
+        <div class="panel" style="max-width:520px;">
+          <div class="text-center" style="margin-bottom:24px;">
+            <div class="profile-avatar" style="display:inline-block;">
+              <img id="profileImagePreview" src="" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:4px solid var(--green-100);">
+              <button type="button" id="profileImageBtn"><i class="bi bi-camera"></i></button>
+            </div>
+            <input type="file" id="profileImageInput" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+          </div>
+          <form id="profileForm">
+            <div class="form-field"><label>Full Name</label><input class="form-control" id="profileNameInput" required></div>
+            <div class="form-field"><label>Email</label><input class="form-control" id="profileEmailInput" disabled></div>
+            <div id="profileFormMsg" class="pill pill-green" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> Save Changes</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+<div class="d-modal-overlay" id="addStudentModal">
+  <div class="d-modal" style="max-width:640px;">
+    <div class="d-modal-head"><h3>Register Student (Walk-in / Cash)</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div class="role-tabs" style="margin-bottom:20px;">
+      <button type="button" class="enrollment-type-btn active" data-type="new"><i class="bi bi-person-plus"></i> New Student</button>
+      <button type="button" class="enrollment-type-btn" data-type="old"><i class="bi bi-person-check"></i> Old Student</button>
+    </div>
+    <p class="hint" id="enrollmentTypeHint" style="margin-bottom:16px;">A fresh cash enrollment — records a payment and creates full login credentials.</p>
+    <form id="addStudentForm">
+      <p class="eyebrow">PERSONAL DETAILS</p>
+      <div class="form-field"><label>Full Name *</label><input class="form-control" name="fullName" required></div>
+      <div class="form-row">
+        <div class="form-field"><label>Date of Birth</label><input type="date" class="form-control" name="dob"></div>
+        <div class="form-field"><label>Gender</label>
+          <select class="form-control" name="gender"><option value="">Select gender</option><option>Female</option><option>Male</option><option>Prefer not to say</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Nationality</label><select class="form-control" name="nationality" id="manualNationalitySelect"></select></div>
+        <div class="form-field"><label>State of Origin</label><select class="form-control" name="state" id="manualStateSelect"></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>LGA</label><input class="form-control" name="lga"></div>
+        <div class="form-field"><label>NIN</label><input class="form-control" name="nin" maxlength="11" inputmode="numeric" placeholder="11-digit NIN"></div>
+      </div>
+      <div class="form-field"><label>Address</label><input class="form-control" name="address"></div>
+      <div class="form-field"><label>Passport Photograph <span class="muted" style="font-weight:400;">(max 1MB)</span></label><input type="file" class="form-control" name="passportPhoto" id="manualPassportInput" accept="image/png,image/jpeg"></div>
+
+      <p class="eyebrow" style="margin-top:22px;">CONTACT &amp; ENROLLMENT</p>
+      <div class="form-row">
+        <div class="form-field"><label>Login Email *</label><input type="email" class="form-control" name="email" required></div>
+        <div class="form-field"><label>Phone</label><input class="form-control" name="phone"></div>
+      </div>
+      <div class="form-field"><label>Course *</label><select class="form-control" name="course" id="addStudentCourseSelect" required></select></div>
+      <div class="form-field"><label>Training Mode *</label>
+        <select class="form-control" name="deliveryMode" id="addStudentDeliveryModeSelect" required>
+          <option value="online">Online Training</option>
+          <option value="physical">Physical Training (in-person)</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Highest Qualification</label>
+        <select class="form-control" name="qualification"><option>Secondary School (SSCE/WAEC)</option><option>OND / NCE</option><option>HND / Bachelor's Degree</option><option>Postgraduate</option><option>Other</option></select>
+      </div>
+      <div class="form-field" id="currentStageField" style="display:none;"><label>Current Learning Stage</label><input class="form-control" name="currentStage" placeholder="e.g. Module 2, Lesson 3 — for seamless continuation online"></div>
+
+      <p class="eyebrow" style="margin-top:22px;">PAYMENT</p>
+      <div class="form-row">
+        <div class="form-field"><label>Course Cost (₦)</label><input type="number" class="form-control" name="courseCost" id="manualCourseCostInput" placeholder="e.g. 85000"></div>
+        <div class="form-field" id="cashAmountField"><label>Amount Paid (₦)</label><input type="number" class="form-control" name="amountPaid" id="manualAmountPaidInput" placeholder="e.g. 40000"></div>
+      </div>
+      <div class="panel" style="background:var(--paper-2);padding:14px 18px;margin-bottom:20px;">
+        <div class="flex justify-between items-center"><span class="muted" style="font-size:13px;">Balance Due</span><b id="manualBalanceDisplay" style="font-size:16px;color:var(--coral);">₦0</b></div>
+      </div>
+
+      <div class="form-field">
+        <label>Passkey <span class="muted" style="font-weight:400;">(leave blank to auto-generate)</span></label>
+        <div class="flex gap-8"><input class="form-control" name="passkey" id="manualPasskeyInput" placeholder="e.g. 2468-44-5GF-81TP">
+        <button type="button" class="btn btn-outline btn-sm" id="generateManualPasskeyBtn"><i class="bi bi-shuffle"></i> Generate</button></div>
+      </div>
+      <div id="addStudentMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+      <button type="submit" class="btn btn-primary btn-block"><i class="bi bi-person-check"></i> Register Student</button>
+    </form>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="addInstructorModal">
+  <div class="d-modal">
+    <div class="d-modal-head"><h3>Add Instructor</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <form id="addInstructorForm">
+      <div class="form-field"><label>Full Name</label><input class="form-control" name="name" required></div>
+      <div class="form-row"><div class="form-field"><label>Login Email</label><input type="email" class="form-control" name="email" required></div><div class="form-field"><label>Phone</label><input class="form-control" name="phone"></div></div>
+      <div class="form-field"><label>Department</label><input class="form-control" name="department" placeholder="e.g. Software Engineering"></div>
+      <div class="form-field">
+        <label>Passkey <span class="muted" style="font-weight:400;">(leave blank to auto-generate)</span></label>
+        <div class="flex gap-8"><input class="form-control" name="passkey" id="instructorPasskeyInput" placeholder="e.g. 2468-44-5GF-81TP">
+        <button type="button" class="btn btn-outline btn-sm" id="generateInstructorPasskeyBtn"><i class="bi bi-shuffle"></i> Generate</button></div>
+      </div>
+      <div id="addInstructorMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+      <button type="submit" class="btn btn-primary btn-block"><i class="bi bi-person-check"></i> Add Instructor</button>
+    </form>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="moduleEditModal">
+  <div class="d-modal">
+    <div class="d-modal-head"><h3 id="moduleEditTitle">Add Module</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div class="form-field"><label>Module Title *</label><input class="form-control" id="moduleTitleInput" required></div>
+    <div class="form-field">
+      <label>Unlocks in Week</label>
+      <input type="number" min="1" class="form-control" id="moduleUnlockWeekInput" value="1">
+      <p class="hint">Students won't see this module until they reach this week of the course — this is how drip scheduling works (e.g. Week 1 → Module 1, Week 2 → Modules 2 &amp; 3).</p>
+    </div>
+    <div id="moduleFormMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+    <button class="btn btn-primary btn-block" id="saveModuleBtn"><i class="bi bi-check2-circle"></i> Save Module</button>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="moduleQuizModal">
+  <div class="d-modal" style="max-width:720px;">
+    <div class="d-modal-head"><h3>Module Quiz</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <label class="checkline" style="margin-bottom:18px;"><input type="checkbox" id="quizEnabledInput"><span>Require this quiz before the module counts as complete</span></label>
+    <div class="form-row">
+      <div class="form-field"><label>Questions per attempt</label><input type="number" min="1" class="form-control" id="quizQuestionsPerAttemptInput" value="10"></div>
+      <div class="form-field"><label>Pass score (%)</label><input type="number" min="1" max="100" class="form-control" id="quizPassScoreInput" value="80"></div>
+    </div>
+    <p class="hint" style="margin-bottom:16px;">Build a large question pool below — each attempt shuffles the pool and draws a fresh set, so a retake doesn't repeat the same questions. Mark the correct option with the radio button next to it.</p>
+    <div id="quizQuestionsList"></div>
+    <button type="button" class="btn btn-outline btn-sm" id="addQuizQuestionBtn" style="margin:4px 0 20px;"><i class="bi bi-plus-lg"></i> Add Question</button>
+    <div id="quizFormMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+    <button class="btn btn-primary btn-block" id="saveQuizBtn"><i class="bi bi-check2-circle"></i> Save Quiz</button>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="assignmentEditorModal">
+  <div class="d-modal" style="max-width:640px;">
+    <div class="d-modal-head"><h3 id="assignmentEditorTitle">Create Assignment</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div class="form-field"><label>Assignment Title *</label><input class="form-control" id="assignmentTitleInput" required></div>
+    <div class="form-field"><label>Associated Course *</label><select class="form-control" id="assignmentCourseSelectInput" required></select></div>
+    <div class="form-field"><label>Instructions</label><textarea class="form-control" id="assignmentInstructionsInput" rows="4" placeholder="What should the student do?"></textarea></div>
+    <div class="form-row">
+      <div class="form-field"><label>Due Date</label><input type="date" class="form-control" id="assignmentDueDateInput"></div>
+      <div class="form-field"><label>Max Score</label><input type="number" min="1" class="form-control" id="assignmentMaxScoreInput" value="100"></div>
+    </div>
+    <div class="form-field"><label>Reference File (optional)</label><input type="file" class="form-control" id="assignmentAttachmentInput"><p class="hint" id="assignmentExistingAttachment"></p></div>
+    <div id="assignmentFormMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+    <button class="btn btn-primary btn-block" id="saveAssignmentBtn"><i class="bi bi-check2-circle"></i> Save Assignment</button>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="assignmentSubmissionsModal">
+  <div class="d-modal" style="max-width:680px;">
+    <div class="d-modal-head"><h3 id="assignmentSubmissionsTitle">Submissions</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div id="assignmentSubmissionsList" style="max-height:70vh;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="lessonEditorModal">
+  <div class="d-modal" style="max-width:680px;">
+    <div class="d-modal-head"><h3 id="lessonEditorTitle">Add Lesson</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div class="form-field"><label>Lesson Title *</label><input class="form-control" id="lessonTitleInput" required></div>
+    <div class="form-field"><label>Content Type</label>
+      <select class="form-control" id="lessonTypeSelect">
+        <option value="text">Text (rich editor)</option>
+        <option value="video">YouTube Video</option>
+        <option value="pdf">PDF Attachment</option>
+        <option value="zip">ZIP Archive</option>
+        <option value="ppt">PowerPoint</option>
+      </select>
+    </div>
+    <div class="form-field" id="lessonTextWrap"><label>Content</label><div id="lessonQuillEditor"></div></div>
+    <div class="form-field" id="lessonVideoWrap" style="display:none;"><label>YouTube Embed URL</label><input class="form-control" id="lessonVideoInput" placeholder="https://www.youtube.com/embed/..."></div>
+    <div class="form-field" id="lessonFileWrap" style="display:none;"><label>Upload File</label><input type="file" class="form-control" id="lessonFileInput"><p class="hint" id="lessonFileHint"></p></div>
+    <button class="btn btn-primary btn-block" id="saveLessonBtn" style="margin-top:10px;"><i class="bi bi-check2-circle"></i> Save Lesson</button>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="addNewsModal">
+  <div class="d-modal" style="max-width:620px;">
+    <div class="d-modal-head"><h3 id="newsModalTitle">New Article</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div class="form-field"><label>Title *</label><input class="form-control" id="newsTitleInput" required></div>
+    <div class="form-row">
+      <div class="form-field"><label>Category</label>
+        <select class="form-control" id="newsCategoryInput"><option>Notice</option><option>Academic</option><option>Admission</option><option>Event</option><option>Platform</option><option>Graduation</option><option>Partnership</option></select>
+      </div>
+      <div class="form-field"><label>Excerpt (short summary)</label><input class="form-control" id="newsExcerptInput"></div>
+    </div>
+    <div class="form-field"><label>Full Content</label><div id="newsQuillEditor"></div></div>
+    <div class="form-row" style="margin-top:16px;">
+      <div class="form-field"><label>Cover Image</label><input type="file" class="form-control" id="newsImageInput" accept="image/*"></div>
+      <div class="form-field"><label>Attach PDF (optional)</label><input type="file" class="form-control" id="newsAttachmentInput" accept="application/pdf"></div>
+    </div>
+    <div id="newsFormMsg" class="pill pill-coral" style="display:none;width:100%;box-sizing:border-box;padding:12px 16px;margin-bottom:16px;"></div>
+    <button class="btn btn-primary btn-block" id="saveNewsBtn"><i class="bi bi-newspaper"></i> Publish Article</button>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="studentDetailModal">
+  <div class="d-modal" style="max-width:560px;">
+    <div class="d-modal-head"><h3>Student Record</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div id="studentDetailBody"></div>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="reviewApplicationModal">
+  <div class="d-modal" style="max-width:600px;">
+    <div class="d-modal-head"><h3>Review Application</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div id="reviewApplicationBody"></div>
+  </div>
+</div>
+
+<div class="d-modal-overlay" id="editApplicationModal">
+  <div class="d-modal" style="max-width:600px;">
+    <div class="d-modal-head"><h3>Edit Applicant Details</h3><button class="d-modal-close" data-modal-close><i class="bi bi-x-lg"></i></button></div>
+    <div id="editApplicationBody"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site-config.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/dashboard-common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+<script src="../assets/js/rich-editor.js"></script>
+<script src="../assets/js/admin-dashboard.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    let courses = PGCC_DATA.courses;
+    try {
+      const res = await fetch(`${API_BASE_URL}/courses`);
+      const live = await res.json();
+      if (Array.isArray(live) && live.length) courses = live;
+    } catch (err) {
+      console.warn('Could not load live courses, showing demo catalog instead:', err.message);
+    }
+    const sel = document.getElementById('addStudentCourseSelect');
+    if (sel) courses.forEach(c => sel.insertAdjacentHTML('beforeend', `<option>${c.title}</option>`));
+  });
+</script>
+</body>
+</html>

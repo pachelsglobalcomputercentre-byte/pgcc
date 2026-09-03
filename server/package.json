@@ -1,0 +1,26 @@
+{
+  "name": "pgcc-institute-server",
+  "description": "PGCC Institute backend — Node.js + Express + MongoDB. Handles applications, login, and payment verification.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed-admin": "node seed-admin.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.24.4",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^9.1.0"
+  }
+}

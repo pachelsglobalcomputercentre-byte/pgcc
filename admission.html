@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admission — PGCC Institute</title>
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="navbar" id="mainNavbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="PGCC Institute logo" onerror="this.src='https://placehold.co/80x80/0f2e1d/34c66f?text=PGCC'">
+      <span class="brand-text"><span class="brand-name">PGCC Institute</span><span class="brand-sub">Pachels Global Computer Centre</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="courses.html" class="nav-link">Courses</a>
+      <a href="admission.html" class="nav-link active">Admission</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="ai-assistant.html" class="nav-link">AI Assistant</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link">Portals <i class="bi bi-chevron-down" style="font-size:10px;"></i></a>
+        <div class="dropdown-menu">
+          <a href="login.html?role=student"><i class="bi bi-mortarboard"></i> Student Portal</a>
+          <a href="login.html?role=instructor"><i class="bi bi-person-workspace"></i> Instructor Portal</a>
+          <a href="login.html?role=admin"><i class="bi bi-shield-lock"></i> Admin Portal</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="admission.html" class="btn btn-primary btn-sm">Apply Now</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+  </div>
+</header>
+
+<div class="mobile-panel">
+  <button class="mobile-close" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="courses.html">Courses</a>
+  <a href="admission.html">Admission</a>
+  <a href="news.html">News</a>
+  <a href="ai-assistant.html">AI Assistant</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Log In</a>
+  <a href="admission.html" style="color:var(--green-400);">Apply Now →</a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html" style="color:#9fc0a7;">Home</a> <i class="bi bi-chevron-right" style="font-size:10px;"></i> <span>Admission</span></div>
+    <h1>Applications are open for the next cohort.</h1>
+    <p>Fill the form below to begin your application. Our admissions team reviews every submission within 24 hours.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2" style="gap:50px;align-items:flex-start;">
+
+      <div class="reveal">
+        <div class="eyebrow">APPLICATION PROCESS</div>
+        <h2 style="font-size:26px;margin-bottom:26px;">How admission works</h2>
+        <div class="timeline">
+          <div class="tl-step" data-n="1"><h4>Submit Application</h4><p>Complete the form with your details and preferred course track.</p></div>
+          <div class="tl-step" data-n="2"><h4>Application Review</h4><p>Our admissions office reviews your submission, usually within 24 hours.</p></div>
+          <div class="tl-step" data-n="3"><h4>Approval & Payment</h4><p>Once approved, you'll receive fee details and payment plan options.</p></div>
+          <div class="tl-step" data-n="4"><h4>Account Activation</h4><p>Your Student Portal account is created — you can log in immediately.</p></div>
+          <div class="tl-step" data-n="5"><h4>Orientation & First Class</h4><p>Join orientation, meet your instructor, and start learning.</p></div>
+        </div>
+
+        <div class="panel" style="margin-top:36px;background:var(--green-100);border:none;">
+          <div class="flex gap-12" style="align-items:flex-start;">
+            <i class="bi bi-info-circle" style="font-size:20px;color:var(--green-700);flex-shrink:0;"></i>
+            <p style="margin:0;font-size:13.5px;color:var(--green-700);">Bring a valid ID and passport photograph on your first orientation day. Payment plans are available — ask admissions for details.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="card" style="padding:32px;">
+          <h3 style="margin-bottom:6px;">Start Your Application</h3>
+          <p class="muted" style="margin-bottom:26px;">Fields marked * are required.</p>
+          <form class="demo-form" id="admissionForm" novalidate>
+            <div class="form-row">
+              <div class="form-field"><label>Full Name *</label><input type="text" name="fullName" class="form-control" placeholder="e.g. Osaze Igbinedion" required></div>
+              <div class="form-field"><label>Date of Birth *</label><input type="date" name="dob" class="form-control" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Gender *</label>
+                <select class="form-control" name="gender" required>
+                  <option value="">Select gender</option>
+                  <option>Female</option><option>Male</option><option>Prefer not to say</option>
+                </select>
+              </div>
+              <div class="form-field"><label>Nationality *</label>
+                <select class="form-control" id="nationalitySelect" name="nationality" required></select>
+              </div>
+            </div>
+            <div class="form-field" id="nationalityOtherWrap" style="display:none;">
+              <label>Please specify nationality *</label><input type="text" class="form-control" id="nationalityOther">
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>State of Origin *</label>
+                <select class="form-control" id="stateSelect" name="state" required></select>
+              </div>
+              <div class="form-field"><label>Local Government Area (LGA) *</label><input type="text" name="lga" class="form-control" placeholder="e.g. Egor" required></div>
+            </div>
+            <div class="form-field"><label>Residential Address *</label><textarea name="address" class="form-control" placeholder="Street, city, state" required></textarea></div>
+            <div class="form-row">
+              <div class="form-field"><label>Phone Number *</label><input type="tel" name="phone" class="form-control" placeholder="080X XXX XXXX" required></div>
+              <div class="form-field">
+                <label>Email Address *</label>
+                <div class="input-icon">
+                  <i class="bi bi-envelope"></i>
+                  <input type="email" name="email" class="form-control" id="emailInput" placeholder="you@example.com" required>
+                </div>
+                <p class="hint" id="emailHint"></p>
+              </div>
+            </div>
+            <div class="form-field">
+              <label>NIN (National Identification Number) *</label>
+              <input type="text" name="nin" class="form-control" id="ninInput" placeholder="11-digit NIN" inputmode="numeric" maxlength="11" required>
+              <p class="hint" id="ninHint">Must be exactly 11 digits. We check the format only — final verification happens during in-person registration.</p>
+            </div>
+            <div class="form-field">
+              <label>Passport Photograph * <span class="muted" style="font-weight:400;">(JPG/PNG, max 1MB)</span></label>
+              <input type="file" name="passportPhoto" class="form-control" id="passportInput" accept="image/png, image/jpeg" required>
+              <p class="hint" id="passportHint"></p>
+            </div>
+            <div class="form-field"><label>Training Mode *</label>
+              <select class="form-control" id="admissionDeliveryModeSelect" name="deliveryMode" required>
+                <option value="">Select training mode</option>
+                <option value="online">Online Training</option>
+                <option value="physical">Physical Training (in-person, at our Benin City centre)</option>
+              </select>
+            </div>
+            <div class="form-field"><label>Course Track *</label>
+              <select class="form-control" id="admissionCourseSelect" name="course" required><option value="">Select a course</option></select>
+            </div>
+            <div class="form-field"><label>Highest Qualification</label>
+              <select class="form-control" name="qualification">
+                <option>Secondary School (SSCE/WAEC)</option>
+                <option>OND / NCE</option>
+                <option>HND / Bachelor's Degree</option>
+                <option>Postgraduate</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-field"><label>Tell us your goal</label><textarea name="goal" class="form-control" placeholder="What do you hope to do with this skill?"></textarea></div>
+            <label class="checkline" style="margin-bottom:22px;"><input type="checkbox" required><span>I agree to be contacted by PGCC Institute regarding my application.</span></label>
+            <div id="admissionFormError" class="pill pill-coral" style="display:none;margin-bottom:16px;width:100%;box-sizing:border-box;padding:12px 16px;"></div>
+            <button type="submit" class="btn btn-primary btn-block" id="admissionSubmitBtn"><i class="bi bi-send-check"></i> Submit Application</button>
+          </form>
+
+          <!-- Success state — replaces the form after a valid submission -->
+          <div id="admissionSuccess" style="display:none;text-align:center;padding:20px 6px;">
+            <div class="feature-ic" style="margin:0 auto 18px;width:64px;height:64px;font-size:28px;"><i class="bi bi-check2-circle"></i></div>
+            <h3 style="margin-bottom:10px;">Application received successfully.</h3>
+            <p class="muted">Your application is currently under review. You will receive an email once a decision has been made.</p>
+            <button class="btn btn-outline btn-sm" id="applyAnotherBtn" style="margin-top:10px;">Submit Another Application</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-panel">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">ADMISSION FAQ</div>
+      <h2>Before you apply</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;" class="reveal" id="admissionFaq"></div>
+  </div>
+</section>
+
+<footer class="site-footer" id="siteFooter"></footer>
+<button class="to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+<a href="ai-assistant.html" class="ai-fab"><span class="ring"><i class="bi bi-stars"></i></span> Ask AI Tutor</a>
+
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/footer.js"></script>
+<script src="assets/js/admission-form.js"></script>
+
+</body>
+</html>

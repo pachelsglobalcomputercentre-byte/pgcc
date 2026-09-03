@@ -1,0 +1,15 @@
+# Never commit real credentials
+server/.env
+
+# Dependencies
+node_modules/
+server/node_modules/
+
+# Uploaded files — local disk only, not meant for git.
+# Before a real deploy, swap file storage for Cloudinary (see server/README.md).
+server/uploads/*
+!server/uploads/.gitkeep
+
+# OS/editor noise
+.DS_Store
+*.log
