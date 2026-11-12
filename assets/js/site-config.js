@@ -9,7 +9,7 @@ const ADMIN_NOTIFY_EMAIL = "pachelsglobalcomputercentre@gmail.com";
 // TODO: update this once the server is deployed (e.g. Render).
 // Until then, this assumes you're running it locally with `npm start`
 // inside /server, which serves the API at localhost:5000.
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://pgcc-tsfe.onrender.com/api";
 
 // Turns a stored "/uploads/xyz.jpg" path into a full browsable URL.
 // Passes through anything that's already a full URL unchanged.
