@@ -19,8 +19,6 @@ const broadcastRoutes = require('./routes/broadcast');
 
 const app = express();
 
-app.set('trust proxy', 1);
-
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '*').split(',').map(s => s.trim());
 app.use(cors({
   origin: allowedOrigins.includes('*') ? true : allowedOrigins
