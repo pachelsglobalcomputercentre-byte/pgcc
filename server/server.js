@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('express-async-errors'); // Express 4 doesn't catch errors thrown inside async routes: without this, one bad request can crash the whole server (the browser then just shows "Failed to fetch")
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -18,6 +19,10 @@ const assignmentsRoutes = require('./routes/assignments');
 const broadcastRoutes = require('./routes/broadcast');
 
 const app = express();
+
+// Render sits the app behind a proxy; without this every visitor looks like
+// the same IP to the rate limiters, so they'd all share one small quota.
+app.set('trust proxy', 1);
 
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '*').split(',').map(s => s.trim());
 app.use(cors({
@@ -65,6 +70,11 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+if (!process.env.JWT_SECRET) {
+  console.error('FATAL: JWT_SECRET is not set. Add it in your environment variables — without it nobody can log in.');
+  process.exit(1);
+}
 
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`✓ PGCC Institute API running on port ${PORT}`));
