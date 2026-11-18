@@ -37,12 +37,20 @@ router.post('/', applyLimiter, upload.single('passportPhoto'), async (req, res) 
 
   try {
     const course = await Course.findOne({ title: b.course });
+
+    // The training mode must match the course's own mode, so online and
+    // physical tracks can't be mixed even if someone bypasses the form.
+    const requestedMode = b.deliveryMode === 'physical' ? 'physical' : 'online';
+    if (course && (course.deliveryMode || 'online') !== requestedMode) {
+      return res.status(400).json({ error: `"${course.title}" is a ${course.deliveryMode || 'online'} course — please choose the matching training mode.` });
+    }
+
     const courseCost = course ? parseInt(String(course.price).replace(/[^\d]/g, ''), 10) || 0 : 0;
 
     const application = await Application.create({
       fullName: b.fullName, dob: b.dob, gender: b.gender, nationality: b.nationality,
       state: b.state, lga: b.lga, address: b.address, phone: b.phone, email: b.email,
-      nin: b.nin, deliveryMode: b.deliveryMode === 'physical' ? 'physical' : 'online',
+      nin: b.nin, deliveryMode: requestedMode,
       passportPhotoName: req.file ? req.file.originalname : (b.passportPhotoName || ''),
       passportPhotoUrl: req.file ? `/uploads/${req.file.filename}` : '',
       course: b.course, qualification: b.qualification, goal: b.goal, courseCost

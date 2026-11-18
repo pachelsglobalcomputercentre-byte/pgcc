@@ -1,8 +1,15 @@
 /* =========================================================
-   PGCC INSTITUTE — CREATE THE ADMIN ACCOUNT (run once)
-   Usage:  cd server  →  npm install  →  npm run seed-admin
+   PGCC INSTITUTE — CREATE / UPDATE THE ADMIN ACCOUNT
+   The admin email and passkey are no longer stored in this file.
+   Pass them in the environment when you run it:
+
+   Windows (PowerShell):
+     $env:SEED_ADMIN_EMAIL="you@example.com"; $env:SEED_ADMIN_PASSKEY="a-long-new-passkey"; npm run seed-admin
+   Mac/Linux:
+     SEED_ADMIN_EMAIL=you@example.com SEED_ADMIN_PASSKEY='a-long-new-passkey' npm run seed-admin
+
    Safe to run more than once — it updates the existing admin
-   instead of duplicating it.
+   instead of duplicating it (so it can also be used to rotate the passkey).
    ========================================================= */
 
 require('dotenv').config();
@@ -10,10 +17,15 @@ const bcrypt = require('bcryptjs');
 const connectDB = require('./db');
 const User = require('./models/User');
 
-const ADMIN_EMAIL = 'universalosasgoody@gmail.com';
-const ADMIN_PASSKEY = '53-286-FGk-211-2UUq';
+const ADMIN_EMAIL = (process.env.SEED_ADMIN_EMAIL || '').toLowerCase().trim();
+const ADMIN_PASSKEY = process.env.SEED_ADMIN_PASSKEY || '';
 
 async function seed() {
+  if (!ADMIN_EMAIL || ADMIN_PASSKEY.length < 12) {
+    console.error('Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSKEY (at least 12 characters) before running this script.');
+    process.exit(1);
+  }
+
   await connectDB();
   const passwordHash = await bcrypt.hash(ADMIN_PASSKEY, 10);
 
@@ -24,8 +36,7 @@ async function seed() {
   );
 
   console.log('✓ Admin account ready:', admin.email);
-  console.log('  Log in at login.html?role=admin with this email + the passkey.');
-  console.log('  Consider rotating the passkey afterward, since it was shared in plain text earlier.');
+  console.log('  Log in at login.html?role=admin with this email + the passkey you just set.');
   process.exit(0);
 }
 

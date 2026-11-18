@@ -4,10 +4,11 @@
    then submits to two places at once:
      1) The Express API (server/), which saves to MongoDB —
         this is what makes it show up in the Admin Dashboard.
-        Requires the backend to be running; see /server/README.md.
-     2) FormSubmit.co (emails a copy to ADMIN_NOTIFY_EMAIL) —
-        works immediately, independent of the backend.
+     2) FormSubmit.co (emails a copy to ADMIN_NOTIFY_EMAIL).
    Either one failing does not block the other.
+
+   The Course Track dropdown is filtered by the chosen Training
+   Mode (online / physical), so mismatched pairs can't be submitted.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -16,20 +17,48 @@ document.addEventListener('DOMContentLoaded', async () => {
   const errorBox = document.querySelector('#admissionFormError');
   if (!form) return;
 
-  /* ---------- Populate course dropdown + preselect from ?course= ---------- */
+  /* ---------- Courses, filtered by training mode ---------- */
   const courseSel = document.querySelector('#admissionCourseSelect');
+  const modeSel = document.querySelector('#admissionDeliveryModeSelect');
+  let allCourses = []; // { title, mode } — mode is null for demo data (no filtering possible)
+
   try {
     const res = await fetch(`${API_BASE_URL}/courses`);
     const live = await res.json();
-    const list = Array.isArray(live) && live.length ? live.map(c => c.title) : PGCC_DATA.courses.map(c => c.title);
-    list.forEach(title => courseSel.insertAdjacentHTML('beforeend', `<option>${title}</option>`));
+    if (Array.isArray(live) && live.length) {
+      allCourses = live.map(c => ({ title: c.title, mode: c.deliveryMode === 'physical' ? 'physical' : 'online' }));
+    } else {
+      allCourses = PGCC_DATA.courses.map(c => ({ title: c.title, mode: null }));
+    }
   } catch (err) {
     console.warn('Could not load live courses, showing demo catalog instead:', err.message);
-    PGCC_DATA.courses.forEach(c => courseSel.insertAdjacentHTML('beforeend', `<option>${c.title}</option>`));
+    allCourses = PGCC_DATA.courses.map(c => ({ title: c.title, mode: null }));
   }
+
+  function populateCourses(selectedTitle) {
+    const mode = modeSel.value;
+    if (!mode) {
+      courseSel.innerHTML = '<option value="">Select a training mode first</option>';
+      courseSel.disabled = true;
+      return;
+    }
+    const matching = allCourses.filter(c => c.mode === null || c.mode === mode);
+    courseSel.disabled = false;
+    courseSel.innerHTML = matching.length
+      ? '<option value="">Select a course</option>' + matching.map(c => `<option>${c.title}</option>`).join('')
+      : '<option value="">No courses available for this training mode yet</option>';
+    if (selectedTitle && matching.some(c => c.title === selectedTitle)) courseSel.value = selectedTitle;
+  }
+
+  // Preselect from ?course= (the "Apply for this Course" button): also set the
+  // training mode to that course's own mode, so the pair is always consistent.
   const params = new URLSearchParams(window.location.search);
-  const course = params.get('course');
-  if (course) courseSel.value = course;
+  const preselected = params.get('course');
+  const preselectedCourse = allCourses.find(c => c.title === preselected);
+  if (preselectedCourse && preselectedCourse.mode) modeSel.value = preselectedCourse.mode;
+  populateCourses(preselectedCourse ? preselectedCourse.title : '');
+
+  modeSel.addEventListener('change', () => populateCourses(''));
 
   /* ---------- Populate nationality + state dropdowns ---------- */
   const natSel = document.querySelector('#nationalitySelect');
@@ -46,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   stateSel.insertAdjacentHTML('beforeend', `<option value="">Select state</option>`);
   NIGERIA_STATES.forEach(s => stateSel.insertAdjacentHTML('beforeend', `<option>${s}</option>`));
 
-  /* ---------- FAQ accordion (unchanged behavior, moved from inline) ---------- */
+  /* ---------- FAQ accordion ---------- */
   document.querySelector('#admissionFaq').innerHTML = PGCC_DATA.faqs.map((f, i) => `
     <div class="faq-item ${i===0?'open':''}"><button class="faq-q">${f.q} <i class="bi bi-plus-lg"></i></button><div class="faq-a" style="${i===0?'max-height:200px;':''}"><p>${f.a}</p></div></div>`).join('');
   document.querySelectorAll('.faq-item').forEach(item => {
@@ -100,10 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!val) { hint.textContent = ''; return null; }
     const formatOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
     if (!formatOk) { hint.textContent = 'That doesn\'t look like a valid email.'; hint.style.color = 'var(--coral)'; return false; }
-    // TODO: swap in a real deliverability check here once we pick a provider,
-    // e.g. Abstract API / ZeroBounce. Call looks like:
-    //   const r = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=YOUR_KEY&email=${val}`);
-    //   const j = await r.json(); return j.deliverability === 'DELIVERABLE';
+    // TODO: swap in a real deliverability check here once we pick a provider.
     hint.textContent = 'Format looks valid.';
     hint.style.color = 'var(--green-700)';
     return true;
@@ -137,8 +163,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     btn.disabled = true;
     btn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Submitting…';
 
-    // Fields for the FormSubmit.co email copy (JSON-friendly, no file attached there —
-    // that copy is just a heads-up email, the real file goes to the API below).
     const fd = new FormData(form);
     const applicationData = {
       fullName: fd.get('fullName'),
@@ -158,9 +182,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       goal: fd.get('goal')
     };
 
-    // 1) Save to the real database — as multipart, so the passport photo
-    //    itself actually reaches the server, not just its filename.
+    // 1) Save to the real database — as multipart, so the passport photo reaches the server.
     let savedToServer = false;
+    let serverError = '';
     try {
       const uploadFd = new FormData();
       Object.entries(applicationData).forEach(([key, val]) => uploadFd.append(key, val || ''));
@@ -168,19 +192,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const res = await fetch(`${API_BASE_URL}/applications`, { method: 'POST', body: uploadFd });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(json.error || 'Server rejected the application.');
+      if (!res.ok) { serverError = json.error || 'Server rejected the application.'; throw new Error(serverError); }
       savedToServer = true;
     } catch (err) {
-      console.warn('Could not reach the backend (is it running?):', err.message);
-      // Don't block the user — the FormSubmit.co copy below still gets through,
-      // and the admin will at least see it by email even if the API was down.
+      console.warn('Could not save to the backend:', err.message);
     }
 
-    // 2) Email a copy via FormSubmit.co too — belt-and-suspenders, works even
-    //    if the API above is temporarily unreachable.
-    //    NOTE: the first submission ever sent to a new address triggers a
-    //    one-time "activate this inbox" email from FormSubmit.co — that
-    //    confirmation link has to be clicked once before emails start flowing.
+    // If the server explicitly rejected the application (e.g. mode/course mismatch),
+    // tell the applicant instead of showing a false success screen.
+    if (serverError) {
+      errorBox.textContent = serverError;
+      errorBox.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = originalBtn;
+      return;
+    }
+
+    // 2) Email a copy via FormSubmit.co too — works even if the API is unreachable.
     try {
       await fetch(`https://formsubmit.co/ajax/${ADMIN_NOTIFY_EMAIL}`, {
         method: 'POST',
@@ -203,6 +231,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.querySelector('#applyAnotherBtn')?.addEventListener('click', () => {
     form.reset();
+    populateCourses('');
     document.querySelector('#nationalityOtherWrap').style.display = 'none';
     document.querySelectorAll('.hint').forEach(h => h.textContent = '');
     successBox.style.display = 'none';
